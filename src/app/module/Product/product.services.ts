@@ -1,3 +1,5 @@
+import QueryBuilder from "../../builder/QueryBuilder";
+import { productSearchableFields } from "./product.constant";
 import { TProduct } from "./product.interface";
 import { Product } from "./product.model";
 
@@ -9,8 +11,15 @@ const addProductIntoDB = async (product: TProduct): Promise<TProduct> => {
 };
 
 // get all product
-const getAllProductFromDB = async () => {
-  const result = await Product.find().sort({ createdAt: -1 });
+const getAllProductFromDB = async (query: Record<string, unknown>) => {
+  // const result = await Product.find().sort({ createdAt: -1 });
+
+  const productQuery = new QueryBuilder(Product.find(), query)
+    .search(productSearchableFields)
+    .filter()
+    .sort();
+
+  const result = await productQuery.modelQuery;
 
   return result;
 };
