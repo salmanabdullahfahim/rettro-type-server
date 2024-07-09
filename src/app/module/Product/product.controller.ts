@@ -3,6 +3,7 @@ import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
 import { ProductServices } from "./product.services";
 
+// add product
 const addProduct = catchAsync(async (req, res) => {
   const product = req.body;
 
@@ -16,6 +17,7 @@ const addProduct = catchAsync(async (req, res) => {
   });
 });
 
+// get all product
 const getAllProduct = catchAsync(async (req, res) => {
   const result = await ProductServices.getAllProductFromDB();
 
@@ -27,8 +29,10 @@ const getAllProduct = catchAsync(async (req, res) => {
   });
 });
 
+// get single product
 const getSingleProduct = catchAsync(async (req, res) => {
-  const result = await ProductServices.getSingleProductFromDB();
+  const { id } = req.params;
+  const result = await ProductServices.getSingleProductFromDB(id);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
