@@ -16,6 +16,18 @@ const addProduct = catchAsync(async (req, res) => {
   });
 });
 
+const getAllProduct = catchAsync(async (req, res) => {
+  const result = await ProductServices.getAllProduct();
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Product fetched successfully",
+    data: result,
+  });
+});
+
 export const ProductController = {
   addProduct,
+  getAllProduct,
 };

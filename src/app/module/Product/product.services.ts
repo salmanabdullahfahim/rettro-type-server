@@ -7,6 +7,13 @@ const addProductIntoDB = async (product: TProduct): Promise<TProduct> => {
   return result;
 };
 
+const getAllProduct = async () => {
+  const result = await Product.find();
+
+  return result;
+};
+
 export const ProductServices = {
   addProductIntoDB,
+  getAllProduct,
 };
