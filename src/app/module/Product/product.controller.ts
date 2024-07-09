@@ -1,12 +1,12 @@
 import httpStatus from "http-status";
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
-import { Product } from "./product.model";
+import { ProductServices } from "./product.services";
 
 const addProduct = catchAsync(async (req, res) => {
   const product = req.body;
 
-  const result = await Product.addProductIntoDB(product);
+  const result = await ProductServices.addProductIntoDB(product);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
