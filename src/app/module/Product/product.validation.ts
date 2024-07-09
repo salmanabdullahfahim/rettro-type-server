@@ -7,6 +7,11 @@ const addProductValidationSchema = z.object({
         invalid_type_error: "Name must be string",
       })
       .max(30, { message: "Name can not be more than 30 characters" }),
+    brand: z
+      .string({
+        invalid_type_error: "Brand must be string",
+      })
+      .max(25, { message: "Brand can not be more than 25 characters" }),
     price: z
       .number({
         invalid_type_error: "Price must be number",
@@ -41,6 +46,12 @@ const updateProductValidationSchema = z.object({
         invalid_type_error: "Name must be string",
       })
       .max(30, { message: "Name can not be more than 30 characters" })
+      .optional(),
+    brand: z
+      .string({
+        invalid_type_error: "Brand must be string",
+      })
+      .max(25, { message: "Brand can not be more than 25 characters" })
       .optional(),
     price: z
       .number({

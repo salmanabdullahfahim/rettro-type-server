@@ -10,7 +10,7 @@ const addProductIntoDB = async (product: TProduct): Promise<TProduct> => {
 
 // get all product
 const getAllProductFromDB = async () => {
-  const result = await Product.find();
+  const result = await Product.find().sort({ createdAt: -1 });
 
   return result;
 };
