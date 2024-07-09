@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const createProductValidationSchema = z.object({
+const addProductValidationSchema = z.object({
   name: z
     .string({
       invalid_type_error: "Name must be string",
@@ -33,5 +33,5 @@ const createProductValidationSchema = z.object({
 });
 
 export const ProductValidation = {
-  createProductValidationSchema,
+  addProductValidationSchema,
 };
