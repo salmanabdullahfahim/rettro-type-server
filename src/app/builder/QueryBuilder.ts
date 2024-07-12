@@ -12,8 +12,7 @@ interface ProductDocument extends Document {
 
 interface QueryParams {
   searchTerm?: string;
-  minPrice?: number;
-  maxPrice?: number;
+  priceRange?: string;
   sort?: string;
   limit?: number;
   page?: number;
@@ -52,15 +51,21 @@ class QueryBuilder<T extends ProductDocument> {
     const queryObj: FilterQuery<T> = { ...this.query };
 
     // Filtering for price range
-    if (queryObj.minPrice || queryObj.maxPrice) {
-      queryObj.price = {};
-      if (queryObj.minPrice) queryObj.price.$gte = queryObj.minPrice;
-      if (queryObj.maxPrice) queryObj.price.$lte = queryObj.maxPrice;
-      delete queryObj.minPrice;
-      delete queryObj.maxPrice;
+
+    if (this.query.priceRange) {
+      const [minPrice, maxPrice] = this.query.priceRange.split("-").map(Number);
+      queryObj.price = { $gte: minPrice, $lte: maxPrice };
+      delete queryObj.priceRange;
     }
 
-    const excludeFields = ["searchTerm", "sort", "limit", "page", "fields"];
+    const excludeFields = [
+      "searchTerm",
+      "priceRange",
+      "sort",
+      "limit",
+      "page",
+      "fields",
+    ];
 
     excludeFields.forEach((el) => delete queryObj[el]);
 
