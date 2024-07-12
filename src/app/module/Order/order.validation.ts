@@ -11,7 +11,7 @@ const orderValidationSchema = z.object({
     name: z.string(),
     email: z.string(),
     phoneNumber: z.string(),
-    address: z.string().min(1, "Description is required"),
+    address: z.string().min(1, "Address is required"),
     products: z.array(product),
     payment: z.enum(["cashOnDelivery", "stripe"]),
   }),
