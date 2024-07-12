@@ -21,7 +21,7 @@ const addProductValidationSchema = z.object({
       .string({
         invalid_type_error: "Description must be string",
       })
-      .max(200, { message: "Description can not be more than 200 characters" }),
+      .max(500, { message: "Description can not be more than 500 characters" }),
     availableQuantity: z
       .number({
         invalid_type_error: "Available Quantity must be number",
@@ -63,7 +63,7 @@ const updateProductValidationSchema = z.object({
       .string({
         invalid_type_error: "Description must be string",
       })
-      .max(200, { message: "Description can not be more than 200 characters" })
+      .max(500, { message: "Description can not be more than 500 characters" })
       .optional(),
     availableQuantity: z
       .number({
